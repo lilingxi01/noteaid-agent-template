@@ -1,0 +1,19 @@
+org: lilingxi01
+app: noteaid-app
+service: noteaid-agent-example-1
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+functions:
+  hello:
+    handler: __init__.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-python-requirements

@@ -1,0 +1,16 @@
+{
+  "name": "noteaid-agent-example-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "sls deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^3.34.0",
+    "serverless-python-requirements": "^6.0.0"
+  }
+}
