@@ -1,5 +1,5 @@
-org: lilingxi01
-app: noteaid-app
+org: noteaid
+app: noteaid-agent
 service: noteaid-agent-example-1
 frameworkVersion: '3'
 
