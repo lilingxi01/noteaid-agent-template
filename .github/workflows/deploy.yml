@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         node-version: [18.x]
@@ -21,7 +21,9 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '>=3.9 <3.10'
+    - name: Check Python version
+      run: python --version
     - run: npm ci
     - name: Install Plugin and Deploy
       uses: serverless/github-action@v3.2
