@@ -1,19 +1,24 @@
 org: noteaid
-app: noteaid-agent
+app: noteaid-agent-example-1
 service: noteaid-agent-example-1
 frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: python3.10
+  runtime: python3.9
 
 functions:
-  hello:
+  agent:
     handler: __init__.handler
     events:
       - httpApi:
           path: /
-          method: get
+          method: post
 
 plugins:
   - serverless-python-requirements
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 4680

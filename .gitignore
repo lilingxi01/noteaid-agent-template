@@ -21,6 +21,8 @@ var/
 .vs/
 .nova/
 
+__pycache__/
+
 # Serverless directories
 .serverless/
 
