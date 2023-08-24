@@ -1,0 +1,12 @@
+diff --git a/node_modules/serverless-offline/src/config/supportedRuntimes.js b/node_modules/serverless-offline/src/config/supportedRuntimes.js
+index b23fd17..b8cfec7 100644
+--- a/node_modules/serverless-offline/src/config/supportedRuntimes.js
++++ b/node_modules/serverless-offline/src/config/supportedRuntimes.js
+@@ -30,6 +30,7 @@ export const supportedPython = new Set([
+   'python3.7',
+   'python3.8',
+   'python3.9',
++  'python3.10',
+ ])
+ 
+ // RUBY
