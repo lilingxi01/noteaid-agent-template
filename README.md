@@ -1,4 +1,4 @@
-![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/b3d73058-e3ae-4809-1388-e42c71676400/Ultra)
+![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/a1834b1e-de89-4d46-e2cb-0740ea290e00/Ultra)
 
 # NoteAid Agent Template
 
