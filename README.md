@@ -53,3 +53,14 @@ In a very sooner future, you will be able to test your local-hosted agent direct
 You don't really need to worry about that! Our maintainers will update the agent template regularly, and if there is a major update on the API schema or on the data structure, our maintainers will let you know, thus you can update your agent accordingly.
 
 In most cases, your agent should not break if NoteAid API is updated but your agent is not. For modularization, we make sure that all changes to API mappings and exposed data will happen within `notebridge` package, which is a dependency of this project. Thus, the code of this repo will not be ruined at all during any API updates or regular maintenance. It will just be a version number on your end.
+
+## Folders / Files
+
+- `patches/` - You should not touch this folder as it introduces the support for debugging Python 3.10 locally. It is auto-generated and you should not put any other thing into this folder!
+- `__init__.py` - This file is for AWS Lambda runner to recognize the entrypoint. You should not touch this file unless you know what you are doing.
+- `handler.py` - You should define your main agent within this file. The agent class will then be imported into the `__init__.py` file for feeding into the executor.
+- You can add more files as wishes, but please do not overlap with the existing reserved files. Organize them into a sub-folder like `utils` would be helpful.
+
+## Questions?
+
+If you have any question, feel free to contact Lingxi! If you don't know how to find Lingxi in any way (usually I am on Slack or on WeChat), you can send email to `research@lingxi.li`. He will try to reply you as soon as possible. If I did not reply, follow up with him! He might be busy with something else.
