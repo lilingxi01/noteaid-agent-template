@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "sls offline",
     "deploy": "sls deploy",
     "postinstall": "patch-package"
   },
