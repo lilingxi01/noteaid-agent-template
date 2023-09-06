@@ -1,10 +1,12 @@
-![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/a1834b1e-de89-4d46-e2cb-0740ea290e00/Ultra)
+![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/a5d796eb-b451-49f7-5588-749989656500/Ultra)
 
 # NoteAid Agent Template
 
 This template is the foundation code base for writing a medical agent that could be adapted by main NoteAid service. It is highly recommended to use this template while defining your agent as it brings simplicity on integrating with NoteAid data arguments and also provides a simple way to deploy your agent on AWS Lambda, as simple as a Git push.
 
 This repository does not contain any sensitive content that might affect our main NoteAid service. All variables and database context will be passed into the agent while it is called. All parameters will be mapped into an agent class defined in Python, and what you need to do is put your code into the function of that class, where you can access all the data you need from function parameters.
+
+If you want to learn more about our architecture and our limitations, please read our public technical documentation on Slab: https://noteaid.slab.com/topics/agent-development-gtvedcxv
 
 ## Usage
 
@@ -22,7 +24,7 @@ After installing Node.js and npm, you need to install the dependencies of this p
 npm install
 ```
 
-And then, install Python dependencies in your local Python environment. You can use `conda` for managing different Python environments for different projects if you want. Simply run the following command in your terminal:
+And then, install Python dependencies in your local Python environment. Python 3.10 is required for dependency simplicity and behavior consistency purposes. You can use `conda` for managing different Python environments (including different Python versions) for different projects if you want. Once you setup the Python environment, simply run the following command in your terminal:
 
 ```bash
 pip install -r requirements.txt
