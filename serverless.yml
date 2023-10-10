@@ -8,10 +8,12 @@ useDotenv: true
 provider:
   name: aws
   runtime: python3.10
+  timeout: 60
 
 functions:
   agent:
     handler: __init__.handler
+    timeout: 60
     events:
       - httpApi:
           path: /
