@@ -28,7 +28,7 @@ allowed_origins = [
 CORS(app, origins=allowed_origins)
 
 
-@app.route('/', methods=['POST', 'OPTIONS'])
+@app.route('/', methods=['GET', 'POST', 'OPTIONS'])
 def home():
     return executor()
 
