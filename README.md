@@ -1,4 +1,4 @@
-![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/cd43da1f-fea6-4964-5b01-44223bbe0d00/Ultra)
+![Cover](https://imagedelivery.net/Dr98IMl5gQ9tPkFM5JRcng/bfb776fc-da7e-45b9-7070-fff96cab8c00/Ultra)
 
 # NoteAid Agent Template
 
@@ -10,49 +10,45 @@ If you want to learn more about our architecture and our limitations, please rea
 
 ## Usage
 
-### Environment Preparation
+### Note: Migration Guide from Notebridge 0.2 to 0.4
+
+If you have set up the environment before, you should read this section. Otherwise, you can skip this section.
+
+Previously, we are using NPM (Node.js environment) to start up the local development environment and final deployment. However, due to the complexity and the limitation of AWS environment, we decided to migrate the whole project into Python environment with no Node.js needed. This will bring simplicity to the deployment process and also make the whole project more maintainable.
+
+There are a few folders that you need to delete because they are no longer needed:
+* `node_modules/`
+* `.serverless/`
+
+Plus, the local development environment gets downgraded from Python 3.10 to Python 3.9 for matching the configuration of our new production environment. You can simply remove the previous-created Conda environment and create a new Conda environment from our new `requirements.txt`. Most of the dependencies remain the same, but we have added Flask as our new base architecture for running the code.
+
+### 0. Environment Preparation
 
 Before doing agent development, you need to prepare your environment properly.
 
-You don't need to write any JavaScript code, but in order to run our environment, you need to install Node.js and npm (usually they are installed together).
-
-If you need help installing Node.js and npm or updating them, please refer to [this blog post](https://lingxi.li/writings/8fbd500e-6fd6-4ec1-b7e5-5354a40da305).
-
-After installing Node.js and npm, you need to install the dependencies of this project. Simply run the following command in your terminal:
-
-```bash
-npm install
-```
-
-And then, install Python dependencies in your local Python environment. Python 3.10 is required for dependency simplicity and behavior consistency purposes. You can use `conda` for managing different Python environments (including different Python versions) for different projects if you want. Once you setup the Python environment, simply run the following command in your terminal:
+And then, install Python dependencies in your local Python environment. Python 3.9 is required for dependency simplicity and behavior consistency purposes. You can use `conda` for managing different Python environments (including different Python versions) for different projects if you want. Once you set up the Python environment, simply run the following command in your terminal:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-And then, you are all set! If your project requires some sensitive data like OpenAI API Key, put them into the `.env` file for local development. Your deployed version will have its own environment variables configured somewhere else (by our maintainers).
+And then, you are all set! If your project requires some sensitive data like OpenAI API Key, put them into the `.env` file for local development. In production environment, our software engineers will have the environment variables set up for you, so you don't need to worry about that.
 
-### Production Deployment
-
-For deploying your agent to the production environment, simply push it into the `main` branch. Our CI/CD will push it to AWS Lambda automatically if everything is fine. You don't have to do anything manually! If you don't want to deploy it yet, simply push your changes into a working branch that is different from `main` branch.
-
-### Local Development
+### 1. Local Development
 
 For starting up your agent service locally, run the following command:
 
 ```bash
-npm run dev
+python ./api/index.py
 ```
 
-After that, you will see a localhost URL that you can call to test your agent. You can use any tool you want to fire the request, such as Insomnia or Postman.
+After that, you will see a localhost URL that you can call to test your agent (usually http://localhost:4680). You can then put the URL into the NoteAid Agent Debugger to test your agent.
 
-In a very sooner future, you will be able to test your local-hosted agent directly on our website (with a well-crafted debug tool).
+### 2. Production Deployment
 
-### Update Agent Template
+For deploying your agent to the production environment, simply push it into the `main` Git branch. Our CI/CD will handle everything else! Super easy, right?
 
-You don't really need to worry about that! Our maintainers will update the agent template regularly, and if there is a major update on the API schema or on the data structure, our maintainers will let you know, thus you can update your agent accordingly.
-
-In most cases, your agent should not break if NoteAid API is updated but your agent is not. For modularization, we make sure that all changes to API mappings and exposed data will happen within `notebridge` package, which is a dependency of this project. Thus, the code of this repo will not be ruined at all during any API updates or regular maintenance. It will just be a version number on your end.
+If you don't want to deploy it yet, simply push your changes into a working branch that is different from `main` branch.
 
 ## Folders / Files
 
@@ -60,6 +56,12 @@ In most cases, your agent should not break if NoteAid API is updated but your ag
 - `__init__.py` - This file is for AWS Lambda runner to recognize the entrypoint. You should not touch this file unless you know what you are doing.
 - `handler.py` - You should define your main agent within this file. The agent class will then be imported into the `__init__.py` file for feeding into the executor.
 - You can add more files as wishes, but please do not overlap with the existing reserved files. Organize them into a sub-folder like `utils` would be helpful.
+
+## Technical Note: Update Agent Template
+
+You don't really need to worry about that! Our maintainers will update the agent template regularly, and if there is a major update on the API schema or on the data structure, our maintainers will let you know, thus you can update your agent accordingly (which should barely happen).
+
+In most cases, your agent should not break if NoteAid API is updated but your agent is not. For modularization, we make sure that all changes to API mappings and exposed data will happen within `notebridge` package, which is a dependency of this project. Thus, the code of this repo will not be ruined at all during any API updates or regular maintenance. It will just be a version number on your end.
 
 ## Questions?
 
