@@ -52,9 +52,9 @@ If you don't want to deploy it yet, simply push your changes into a working bran
 
 ## Folders / Files
 
-- `patches/` - You should not touch this folder as it introduces the support for debugging Python 3.10 locally. It is auto-generated and you should not put any other thing into this folder!
-- `__init__.py` - This file is for AWS Lambda runner to recognize the entrypoint. You should not touch this file unless you know what you are doing.
-- `handler.py` - You should define your main agent within this file. The agent class will then be imported into the `__init__.py` file for feeding into the executor.
+- `api/index.py` - This file is for running the base architecture of the agent. You should not touch this file unless you know what you are doing.
+- `requirements.txt` - This file is the dependency list of the agent. You should update this file if you want to add more dependencies. OpenAI and Langchain (a slightly old version) are included by default.
+- `handler.py` - **This file is IMPORTANT for you!** You should define your main agent within this file. The agent class will then be imported into the `api/index.py` file for feeding into the executor.
 - You can add more files as wishes, but please do not overlap with the existing reserved files. Organize them into a sub-folder like `utils` would be helpful.
 
 ## Technical Note: Update Agent Template
