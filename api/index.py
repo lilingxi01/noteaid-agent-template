@@ -13,7 +13,7 @@ if os.getenv("OPENAI_ORG_ID") is not None:
     openai.organization = os.getenv("OPENAI_ORG_ID")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from handler import MyAgent
 from notebridge import make_executor
@@ -31,6 +31,8 @@ CORS(app, origins=allowed_origins)
 
 @app.route('/', methods=['GET', 'POST', 'OPTIONS'])
 def home():
+    if request.method == 'OPTIONS':
+        return 'ok', 200
     return executor()
 
 
