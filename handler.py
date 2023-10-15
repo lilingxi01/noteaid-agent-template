@@ -1,11 +1,14 @@
-from typing import List, Union
+from typing import List
 
-from notebridge import Bridge, ChatMessage, ChatContext
+from notebridge import Bridge, ChatMessage, ChatContext, AgentResponse
 import openai
 
 
 class MyAgent(Bridge):
-    def on_receive(self, message_stack: List[ChatMessage], context: ChatContext) -> Union[str, List[str]]:
+    def on_receive(self,
+                   message_stack: List[ChatMessage],
+                   context: ChatContext,
+                   storage: dict) -> AgentResponse:
         # TODO: Implement your agent here.
         # You can access environment variables by using something like `os.environ['OPENAI_API_KEY']`.
 
@@ -29,4 +32,4 @@ class MyAgent(Bridge):
         chat_completion = openai.ChatCompletion.create(model='gpt-4', messages=gpt_messages)
         answer = chat_completion.choices[0].message.content
 
-        return answer
+        return AgentResponse(messages=[answer], storage={})

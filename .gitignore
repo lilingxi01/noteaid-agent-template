@@ -30,3 +30,8 @@ node_modules/
 
 .env
 .env.*
+
+*.log
+*.pyc
+__pycache__
+.vercel

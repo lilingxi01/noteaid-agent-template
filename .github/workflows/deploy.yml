@@ -11,20 +11,17 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
+    - uses: oven-sh/setup-bun@v1
       with:
-        node-version: '18.x'
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    - name: Check Python version
-      run: python --version
-    - run: npm ci
-    - name: Install Plugin and Deploy
-      uses: serverless/github-action@v3.2
-      with:
-        args: "deploy --stage prod"
+        bun-version: latest
+    - name: Install Vercel CLI
+      run: bun add vercel -g
+    - name: Link the local repo to Vercel
+      run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_DEPLOY_TOKEN }}
       env:
-        SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    - name: Deploy to Vercel
+      run: vercel --prod --token=${{ secrets.VERCEL_DEPLOY_TOKEN }}
+    - name: Log out from Vercel
+      run: vercel logout
