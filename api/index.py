@@ -5,11 +5,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env'))
 
-if os.getenv("OPENAI_ORG_ID") is None or os.getenv("OPENAI_API_KEY") is None:
-    raise Exception("OPENAI_ORG_ID and OPENAI_API_KEY must be set in the .env file before use.")
+if os.getenv("OPENAI_API_KEY") is None:
+    raise Exception("OPENAI_API_KEY must be set in the .env file before use.")
 
 import openai
-openai.organization = os.getenv("OPENAI_ORG_ID")
+if os.getenv("OPENAI_ORG_ID") is not None:
+    openai.organization = os.getenv("OPENAI_ORG_ID")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 from flask import Flask
